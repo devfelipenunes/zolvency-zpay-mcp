@@ -429,21 +429,25 @@ async def resolve_x402_challenge(headers: Dict[str, Any], mandate_id: int, user_
 
 @mcp.tool()
 async def get_mandate_details(mandate_id: int) -> str:
-    """Returns detailed info about a specific mandate (Transfer limits, expiration, etc)."""
+    """Returns detailed info about a specific mandate (Transfer limits, expiration, etc) in structured JSON format for agentic parsing."""
     kit = get_kit()
     try:
         details = await kit.get_mandate_details(mandate_id)
-        msg = [f"📜 **Mandate #{mandate_id} Report**", ""]
-        msg.append(f"**Status:** {'✅ ACTIVE' if details.active else '❌ INACTIVE'}")
-        msg.append(f"💰 **Total Limit:** {details.limit_xlm} XLM")
-        msg.append(f"💸 **Total Spent:** {details.spent_xlm} XLM")
-        msg.append(f"💳 **Available Now:** {details.available_xlm} XLM")
         
-        msg.append(f"\n- Root Anchor: `{details.root_anchor}`")
-        msg.append(f"- Agent: `{details.agent}`")
-        return "\n".join(msg)
+        # Return structured JSON for semantic agent autonomy
+        report = {
+            "mandate_id": mandate_id,
+            "status": "ACTIVE" if details.active else "INACTIVE",
+            "limit_xlm": details.limit_xlm,
+            "spent_xlm": details.spent_xlm,
+            "available_xlm": details.available_xlm,
+            "root_anchor": details.root_anchor,
+            "agent": details.agent
+        }
+        
+        return json.dumps(report, indent=2)
     except Exception as e:
-        return f"❌ **Error:** {str(e)}"
+        return json.dumps({"error": f"Failed to fetch mandate details: {str(e)}"}, indent=2)
 
 @mcp.tool()
 async def get_transaction_report(transaction_hash: str) -> str:
