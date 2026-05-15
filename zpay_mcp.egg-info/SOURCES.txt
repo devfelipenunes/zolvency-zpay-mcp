@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+tests/test_init.py
+tests/test_logic.py
+tests/test_mcp.py
+tests/test_server_v2.py
+tests/test_sovereign.py
+tests/test_tools_v2.py
+zpay_mcp/__init__.py
+zpay_mcp/config.py
+zpay_mcp/server.py
+zpay_mcp.egg-info/PKG-INFO
+zpay_mcp.egg-info/SOURCES.txt
+zpay_mcp.egg-info/dependency_links.txt
+zpay_mcp.egg-info/entry_points.txt
+zpay_mcp.egg-info/requires.txt
+zpay_mcp.egg-info/top_level.txt
