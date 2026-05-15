@@ -37,7 +37,6 @@ from stellar_sdk import Keypair
 from .config import settings
 from zpay.agent_kit import ZPayAgentKit, ZPayConfig
 from zpay.models import MandateModel, PaymentResponse, AuditReport, EscrowPayment
-from zpay.x402 import X402Challenge
 
 # Logging Setup
 logging.basicConfig(
@@ -399,23 +398,6 @@ async def verify_mandate_on_chain(mandate_id: Optional[int] = None) -> str:
             return f"⚠️ **Mandate #{m_id} is INACTIVE** (Revoked or Expired on-chain)."
     except Exception as e:
         return f"❌ **Verification Error:** {str(e)}"
-
-@mcp.tool()
-async def resolve_x402_challenge(headers: Dict[str, Any], mandate_id: int, user_anchor_address: str) -> str:
-    """Resolves an HTTP 402 Payment Required challenge by executing an authorized payment."""
-    kit = get_kit()
-    challenge = X402Challenge.from_headers(headers)
-    resolution = await kit.x402.resolve_challenge(challenge, mandate_id, user_anchor_address)
-    
-    if not resolution["success"]:
-        return f"❌ **x402 Resolution Failed:** {resolution['error']}"
-    
-    return await execute_sovereign_payment(
-        amount=challenge.amount,
-        recipient_address=challenge.destination,
-        mandate_id=mandate_id,
-        user_anchor_address=user_anchor_address
-    )
 
 @mcp.tool()
 async def get_mandate_details(mandate_id: int) -> str:
