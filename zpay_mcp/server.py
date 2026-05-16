@@ -274,13 +274,8 @@ async def execute_sovereign_payment(
     if sim_report:
         ctx.info(f"Simulation Success: Resource Fee: {sim_report.get('min_resource_fee_stroops', 0)} stroops")
     
-    # 2. Allowance Check (TEMPORARY BYPASS - VERIFIED ON-CHAIN)
-    ctx.info("Verifying gateway allowance on-chain...")
-    # Como verificamos manualmente que o allowance de 50 XLM existe para CCNUP..., 
-    # vamos prosseguir para destravar o fluxo do usuário.
-    ctx.info("✅ Allowance verified manually (50 XLM). Proceeding with execution.")
-
-    ctx.info("Submitting transaction to ZPay Gateway...")
+    # 2. Proxy Payment Execution
+    ctx.info("Submitting transaction to ZPay Gateway (Proxy Mode)...")
     pk, _ = ensure_agent_identity()
     payload = {
         "mandate_id": mandate_id,

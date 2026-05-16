@@ -11,10 +11,10 @@ class ZPaySettings(BaseSettings):
     stellar_network_passphrase: str = "Test SDF Network ; September 2015"
 
     # Contract IDs
-    contract_id_nexus: str = "CDT2JUGATFANH3NN6XKBRVPXD3Y3I5K7FIAR6CTA3XUM4VVBV4BEN4U7"
-    contract_id_gateway: str = "CAQHJPCHL72ZP45LNOLXSIZQET7R2XEH65VYTQCKMZ2DVHJ6O5DIZ5IE"
-    contract_id_identity: Optional[str] = "CAO7GUDIMPJFR2QZROJPBKIDBLNXNACMEGYV36XPQTV5IAPSKCMHGHDJ"
-    contract_id_direct_sovereign: Optional[str] = "CDIC65LUXGRZHU2FHIB7OJSVQCB7NIVVOD2DJUQWTWJQYKBVETUREYA7"
+    contract_id_nexus: str = "CCFAGREXAP3DEP3H2HOIZQ2GXBMYNNH65GKKQTVJZVAVEQ7EWF4AOSDW"
+    contract_id_gateway: str = "CAQT2GKLEXJQCCSWGXG7HTENOUV6DSBRI4EJ4DVQA2T6H3AZ3S5NWC6T"
+    contract_id_identity: Optional[str] = "CDSSSXGG3VNKVMT72RDNWRPM5WUMAJDGX3LBQ7EOQC55P2ECXBJ2XVIC"
+    contract_id_direct_sovereign: Optional[str] = "CBB6W66F4P7UFNAYA3TIQVLCS5RFAS7C3HRLAX7YYRYFSIKLMDABWXII"
 
     # Backend Configuration
     backend_api_url: str = "http://localhost:3000/api/zpay"
